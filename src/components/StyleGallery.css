@@ -1,0 +1,165 @@
+.gallery__tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.75rem;
+  scrollbar-width: thin;
+}
+.gallery__tab {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px dashed var(--cocoa);
+  background: transparent;
+  font-weight: 500;
+  cursor: pointer;
+}
+.gallery__tab[aria-selected='true'] {
+  border-style: solid;
+  border-color: var(--cocoa-ink);
+  background: var(--cocoa-ink);
+  color: var(--paper);
+}
+.gallery__count {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery__grid {
+  --shape: 4 / 5;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  gap: 1.75rem 1.25rem;
+}
+/* Photo shape per garment type so nothing important gets cropped */
+.gallery__grid--kurta,
+.gallery__grid--blouse {
+  --shape: 1 / 1;
+}
+.gallery__grid--sleeve {
+  --shape: 3 / 4;
+}
+.gallery__item {
+  min-width: 0;
+}
+.gallery__open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: zoom-in;
+}
+.gallery__open img {
+  width: 100%;
+  aspect-ratio: var(--shape);
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--radius);
+  background: var(--muslin-deep);
+}
+.gallery__name {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--cocoa-ink);
+}
+.gallery__open:hover .gallery__name {
+  color: var(--thread);
+}
+
+/* Lightbox */
+.lightbox {
+  width: min(64rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--cocoa);
+}
+.lightbox::backdrop {
+  background: rgb(58 40 38 / 0.72);
+}
+.lightbox__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+.lightbox__img {
+  width: 100%;
+  height: min(80dvh, 44rem);
+  object-fit: contain;
+  background: var(--muslin-deep);
+}
+.lightbox__info {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+}
+.lightbox__position {
+  font-size: var(--step--1);
+  margin-top: 2rem;
+}
+.lightbox__info h3 {
+  font-size: var(--step-2);
+  margin-bottom: 0.5rem;
+}
+.lightbox__nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+.lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 0;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+@media (max-width: 520px) {
+  .gallery__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 0.75rem;
+  }
+  .gallery__name {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .lightbox__body {
+    grid-template-columns: 1fr;
+  }
+  .lightbox__img {
+    height: 55dvh;
+  }
+  .lightbox__info {
+    padding: 1.25rem;
+  }
+  .lightbox__position {
+    margin-top: 0;
+  }
+  .lightbox__close {
+    top: 0.75rem;
+  }
+}

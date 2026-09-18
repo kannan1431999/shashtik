@@ -1,0 +1,129 @@
+/* A tape measure laid across the page: one segment per topic, in course order */
+.tape {
+  --tape: #f7efd9;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  column-gap: 0;
+}
+
+.tape__group {
+  grid-row: 1;
+  padding: 0 0 0.6rem 0.1rem;
+}
+.tape__group h3 {
+  font-size: var(--step-1);
+}
+.tape__group--basics {
+  grid-column: 1 / 6;
+}
+.tape__group--garments {
+  grid-column: 6 / 10;
+  padding-left: 1rem;
+}
+
+.tape__cell {
+  grid-row: 2;
+  position: relative;
+  padding: 2.9rem 0.9rem 1.1rem;
+  background:
+    /* long ticks every 5 short ones */
+    repeating-linear-gradient(90deg, var(--cocoa) 0 1px, transparent 1px 100%) 0 0 / 40px 18px repeat-x,
+    repeating-linear-gradient(90deg, var(--cocoa) 0 1px, transparent 1px 100%) 0 0 / 8px 9px repeat-x,
+    var(--tape);
+  border-block: 1px solid rgb(92 64 62 / 0.35);
+  min-height: 9.5rem;
+}
+.tape__cell + .tape__cell {
+  border-left: 1px solid rgb(92 64 62 / 0.2);
+}
+.tape__cell--garments {
+  --tape: #e3ebfb;
+}
+.tape__cell:nth-child(8) {
+  /* first garment cell: a gap in the tape marks the change from basics to garments */
+  margin-left: 1rem;
+  border-left: 0;
+}
+.tape__cell:nth-child(3) {
+  border-radius: var(--radius) 0 0 var(--radius);
+  border-left: 1px solid rgb(92 64 62 / 0.35);
+}
+.tape__cell:nth-child(7) {
+  border-radius: 0 var(--radius) var(--radius) 0;
+  border-right: 1px solid rgb(92 64 62 / 0.35);
+}
+.tape__cell:last-child {
+  border-radius: 0 var(--radius) var(--radius) 0;
+  border-right: 1px solid rgb(92 64 62 / 0.35);
+}
+
+.tape__mark {
+  position: absolute;
+  top: 1.2rem;
+  left: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tape__topic {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  color: var(--cocoa-ink);
+  text-align: left;
+}
+.tape__topic--link {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--thread);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.25em;
+}
+.tape__topic--link:hover {
+  color: var(--thread);
+}
+
+.syllabus__note {
+  margin-top: 1.25rem;
+  font-size: var(--step--1);
+}
+
+@media (max-width: 900px) {
+  .tape {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+  .tape__group {
+    grid-row: auto;
+    grid-column: 1 / -1 !important;
+    padding: 1.25rem 0 0.6rem;
+  }
+  .tape__group--basics {
+    order: 0;
+  }
+  .tape__cell--basics {
+    order: 1;
+  }
+  .tape__group--garments {
+    order: 2;
+    padding-left: 0;
+  }
+  .tape__cell--garments {
+    order: 3;
+  }
+  .tape__cell {
+    grid-row: auto;
+    min-height: 7.5rem;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: 1px solid rgb(92 64 62 / 0.25) !important;
+    margin-top: -1px !important;
+  }
+}

@@ -1,0 +1,88 @@
+.stitching {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.stitching__text h2 {
+  font-size: var(--step-2);
+  margin-bottom: 0.75rem;
+}
+.stitching__lede {
+  max-width: 32rem;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 2rem 0 2.25rem;
+  padding: 0;
+}
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 1.5rem 3.25rem;
+}
+/* Steps are joined by a basting thread */
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--thread);
+  color: var(--thread);
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: var(--muslin);
+}
+.steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 1.05rem;
+  top: 2.3rem;
+  bottom: 0.2rem;
+  border-left: 1.5px dashed var(--thread);
+}
+.steps h3 {
+  font-size: 1.3rem;
+  margin: 0.15rem 0 0.25rem;
+}
+
+.stitching__photos {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.stitching__photos figure {
+  margin: 0;
+}
+.stitching__photos figure:first-child {
+  grid-row: span 2;
+}
+.stitching__photos img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--radius);
+  aspect-ratio: 1;
+}
+.stitching__photos figure:first-child img {
+  aspect-ratio: 3 / 5;
+}
+.stitching__photos figcaption {
+  font-size: var(--step--1);
+  margin-top: 0.4rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 860px) {
+  .stitching {
+    grid-template-columns: 1fr;
+  }
+}

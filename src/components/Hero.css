@@ -1,0 +1,151 @@
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter) clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.hero__text {
+  position: relative;
+}
+
+.hero__title {
+  font-size: var(--step-3);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  display: flex;
+  flex-direction: column;
+}
+.hero__for {
+  font-size: 0.5em;
+  color: var(--cocoa);
+}
+
+/* The one moment of motion: the thread draws itself under the title */
+.hero__thread {
+  display: block;
+  width: min(100%, 34rem);
+  height: auto;
+  margin: 0.5rem 0 0 -0.4rem;
+  overflow: visible;
+}
+.hero__thread-line {
+  fill: none;
+  stroke: var(--thread);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-thread 1.6s 0.3s cubic-bezier(0.6, 0.05, 0.3, 1) forwards;
+}
+.hero__thread-heart {
+  fill: var(--thread);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: heart-in 0.35s 1.8s ease-out forwards;
+}
+
+@keyframes draw-thread {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes heart-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero__lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  max-width: 30rem;
+  margin-top: 1.25rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* Photos: a main photo with a smaller one pinned over its corner */
+.hero__photos {
+  margin: 0;
+  position: relative;
+  padding-left: 2.5rem;
+}
+.hero__photo {
+  position: relative;
+}
+.hero__photo img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.hero__photo--main {
+  width: 80%;
+  margin-left: auto;
+}
+.hero__photo--main img {
+  aspect-ratio: 4 / 5;
+}
+/* Tacked-on stitch outline, offset like a pattern piece */
+.hero__photo--main::after {
+  content: '';
+  position: absolute;
+  inset: -0.9rem 0.9rem 0.9rem -0.9rem;
+  border: 1.5px dashed var(--thread);
+  border-radius: calc(var(--radius) + 4px);
+  pointer-events: none;
+}
+.hero__photo--side {
+  position: absolute;
+  width: 42%;
+  left: 0;
+  bottom: 0;
+  border: 6px solid var(--paper);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: 0 18px 40px -24px rgb(58 40 38 / 0.6);
+}
+.hero__photo--side img {
+  aspect-ratio: 1;
+  border-radius: 2px;
+}
+.hero__photos figcaption {
+  width: 50%;
+  margin: 1.4rem 0 0 auto;
+  min-height: 5.5rem;
+  font-size: var(--step--1);
+  line-height: 1.4;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero__photos {
+    max-width: 30rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__thread-line {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .hero__thread-heart {
+    opacity: 1;
+    animation: none;
+  }
+}
