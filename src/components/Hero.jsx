@@ -4,7 +4,7 @@ import { rupees, whatsappLink } from '../lib/whatsapp'
 import './Hero.css'
 
 const main = styleBySlug['pattu-pavadai-type-1']
-const side = styleBySlug['princess-cut-blouse']
+const side = styleBySlug['sleeve-8']
 
 export default function Hero() {
   return (
